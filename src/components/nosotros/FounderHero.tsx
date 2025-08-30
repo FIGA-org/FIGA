@@ -79,6 +79,24 @@ export default function FounderHero() {
           </div>
         </div>
       </div>
+              <div className="mt-8 md:mt-0 w-full">
+          <div className="rounded-2xl overflow-hidden shadow-lg bg-white">
+            <div className="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/0LbJVL4ZKew"
+                title="Mensaje de la fundadora"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+            <div className="p-4">
+              <p className="text-sm font-semibold text-gray-700">
+                Entrevista a nuestra embajadora Silvia Olmedo
+              </p>
+            </div>
+          </div>
+        </div>
     </section>
   );
 }

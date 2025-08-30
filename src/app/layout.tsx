@@ -25,6 +25,9 @@ const playfair = Playfair_Display({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es" className={`${dmSans.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="icon" href="/images/favicon.ico" sizes="any" />
+      </head>
       <body className="bg-white text-gray-900 font-sans">
         <Navbar />
         <main>{children}</main>

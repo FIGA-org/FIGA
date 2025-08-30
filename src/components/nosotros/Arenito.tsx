@@ -102,7 +102,6 @@ export default function ArenitoSection() {
             <iframe
               src="https://www.youtube.com/embed/HApsj0vj3fU?autoplay=1&mute=1"
               title="Arenito Video"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="w-full h-full"

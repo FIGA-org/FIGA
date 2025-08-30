@@ -74,7 +74,7 @@ export default function ImpactSection() {
                     <div>
                         <h3 className="text-2xl font-display font-bold text-gray-800 mb-4">
                             Transformando vidas,{" "}
-                            <span className="text-blue-600">Construyendo esperanza</span>
+                            <span className="text-blue-600">construyendo esperanza</span>
                         </h3>
                         <p className="font-sans text-gray-700 mb-6">
                             Desde Tuxtla Gutiérrez, Chiapas, extendemos nuestro alcance a
