@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function AmbassadorsBanner() {
@@ -24,12 +23,12 @@ export default function AmbassadorsBanner() {
                 nuestro mensaje y alcance.
               </p>
               <div className="flex gap-4 flex-wrap mt-6">
-                <Link
+                {/* <Link
                   href="/noticias"
                   className="bg-white text-blue-700 font-semibold px-5 py-2 rounded-md hover:bg-gray-100 transition"
                 >
                   Ver noticias
-                </Link>
+                </Link> */}
                 <Link
                   href="https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA"
                   className="bg-transparent border border-white px-5 py-2 rounded-md font-semibold hover:bg-white hover:text-blue-800 transition"
@@ -41,10 +40,10 @@ export default function AmbassadorsBanner() {
 
             {/* Image */}
             <div className="flex-shrink-0">
-              <Image
+              <img
                 src="/images/silvia.jpeg"
                 alt="Silvia Olmedo"
-                className="w-60 h-65 md:w-60 md:h-65 rounded-full object-cover shadow-md"
+                className="w-32 h-32 md:w-60 md:h-60 rounded-full object-cover shadow-md"
               />
             </div>
           </div>

@@ -7,24 +7,31 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Hide if scrolling down, show if scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setHidden(true);
       } else {
         setHidden(false);
       }
-
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const navLinks = [
+    { label: "Nosotros", href: "/nosotros" },
+    { label: "Nuestro Impacto", href: "/#impacto" },
+    { label: "Programas", href: "/#programas" },
+    { label: "Transparencia", href: "/transparencia" },
+    { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
+    { label: "Participa", href: "https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA" },
+    // { label: "Noticias", href: "/noticias" },
+  ];
 
   return (
     <header
@@ -32,45 +39,108 @@ export default function Navbar() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{
-        background:
-          "linear-gradient(to right, rgba(38,87,235,0.3), rgba(222,97,97,0.3))",
+        background: "linear-gradient(to right, rgba(38,87,235,0.3), rgba(222,97,97,0.3))",
+        backdropFilter: "saturate(120%) blur(4px)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/images/logo.png" alt="Logo" className="h-20 w-auto" />
-        </Link>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-16 lg:h-18 flex items-center">
+        {/* DESKTOP (lg+) */}
+        <div className="hidden lg:flex w-full items-center gap-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={170}
+              height={54}
+              className="h-12 w-auto lg:h-12 xl:h-14"
+              priority
+            />
+          </Link>
 
-        {/* Navigation Links */}
-        <nav className="hidden md:flex space-x-4 font-medium text-white">
-          {[
-            { label: "Nosotros", href: "/nosotros" },
-            { label: "Nuestro Impacto", href: "/#impacto" },
-            { label: "Programas", href: "/#programas" },
-            { label: "Transparencia", href: "/transparencia" },
-            { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
-            { label: "Participa", href: "https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA" },
-            { label: "Noticias", href: "/nosotros" },
-          ].map((item) => (
+          {/* Nav */}
+          <nav className="flex-1 flex items-center justify-center gap-4 xl:gap-6 2xl:gap-8 font-medium text-white">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-[13px] xl:text-sm whitespace-nowrap transition-colors duration-200 hover:text-white hover:font-bold"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <Link
+            href="/donar"
+            className="shrink-0 bg-white text-blue-700 font-semibold px-3 py-1.5 xl:px-4 xl:py-2 rounded-md hover:bg-gray-100 transition text-sm"
+          >
+            Donar ahora
+          </Link>
+        </div>
+
+        {/* MOBILE + TABLET (under lg) */}
+        <div className="flex lg:hidden w-full items-center justify-between">
+          {/* Hamburger */}
+          <button
+            className="flex items-center p-2 text-white"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Abrir menú"
+          >
+            <svg
+              className="h-7 w-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+
+          {/* Centered tiny logo on md if you want it visible; comment to hide */}
+          <Link href="/" className="hidden md:block">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={140}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+          </Link>
+
+          {/* Donate button (right-aligned) */}
+          <Link
+            href="/donar"
+            className="bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 transition text-sm px-3 py-1.5 md:px-4 md:py-2"
+            onClick={() => setMobileOpen(false)}
+          >
+            Donar ahora
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-[#001f3f] text-white px-4 pb-4 pt-2 space-y-2">
+          {navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm transition-colors duration-200 hover:text-white hover:font-bold"
+              className="block py-2 text-base font-medium hover:text-blue-300"
+              onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
           ))}
-        </nav>
-
-        {/* CTA Button */}
-        <Link
-          href="/donar"
-          className="bg-white text-blue-700 font-semibold px-4 py-2 rounded-md hover:bg-gray-100 transition text-sm"
-        >
-          Donar Ahora
-        </Link>
-      </div>
+        </div>
+      )}
     </header>
   );
 }
