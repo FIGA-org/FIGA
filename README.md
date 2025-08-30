@@ -34,3 +34,5 @@ Las siguientes variables deben ser establecidas antes de continuar con el deploy
 NEXT_PUBLIC_STRIPE_BUTTON_ID={secreto}
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY={secreto}
 NEXT_PUBLIC_PAYPAL_CLIENT_ID={secreto}
+
+Para desarrollo local, pon estas variables en .env.local
