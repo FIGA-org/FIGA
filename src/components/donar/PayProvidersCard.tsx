@@ -33,11 +33,11 @@ function StripeBuyButton({
 }
 
 export default function PayProvidersCard({
-  stripeBuyButtonId,
-  stripePublishableKey,
-  paypalClientId,
+  stripeBuyButtonId = process.env.NEXT_PUBLIC_STRIPE_BUTTON_ID || "",
+  stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "",
+  paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
   paypalCurrency = "MXN",
-  paypalAmount = "250.00",
+  paypalAmount = "50.00",
 }: Props) {
   const paypalContainerRef = useRef<HTMLDivElement | null>(null);
   const paypalRenderedRef = useRef(false);
@@ -98,8 +98,8 @@ export default function PayProvidersCard({
       </p>
 
       {/* Stripe Buy Button */}
-      <div className="mt-5 rounded-lg border border-gray-200 p-4">
-        <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-800">
+      <div className="mt-5 rounded-lg border border-gray-200 p-1 text-xs sm:p-1 sm:text-base">
+        <div className="mb-2 flex items-center gap-2 font-medium text-gray-800">
           <CreditCard className="h-4 w-4" />
           Stripe
         </div>
@@ -110,7 +110,7 @@ export default function PayProvidersCard({
             publishableKey={stripePublishableKey}
           />
         ) : (
-          <p className="text-sm text-gray-500">
+          <p className="text-gray-500">
             Configura tu <code>stripeBuyButtonId</code> y <code>stripePublishableKey</code>.
           </p>
         )}

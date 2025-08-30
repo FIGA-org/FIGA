@@ -110,7 +110,7 @@ export default function TransparencySection() {
         <div className="relative">
           <div className="relative w-full h-64 md:h-[320px] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-blue-100">
             <Image
-              src="/images/personal-therapy.png"
+              src="/images/actividad5.jpeg"
               alt="Sesión con familia"
               fill
               className="object-cover"
