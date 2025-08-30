@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Building2, BriefcaseBusiness, UsersRound, Network, Megaphone } from "lucide-react";
+import { BriefcaseBusiness, Network, Megaphone } from "lucide-react";
 
 function Card({
   icon: Icon,
