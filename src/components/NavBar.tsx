@@ -2,11 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   const navLinks = [
     { label: "Nosotros", href: "/nosotros" },
     { label: "Nuestro Impacto", href: "/#impacto" },
@@ -19,81 +16,46 @@ export default function Navbar() {
 
   return (
     <header
-      className="relative z-[2147483647] sticky top-0 bg-gradient-to-r
-                 from-blue-700/30 via-blue-500/10 to-red-400/30 backdrop-blur-md"
+      className="sticky top-0 z-50 bg-gradient-to-r
+                 from-blue-700/30 via-blue-500/10 to-red-400/30
+                 backdrop-blur-md shadow-md"
       style={{ WebkitBackdropFilter: "saturate(120%) blur(4px)" }}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-16 lg:h-18 flex items-center">
-        {/* Desktop */}
-        <div className="hidden lg:flex w-full items-center gap-4">
-          <Link href="/" className="flex items-center">
-            <Image src="/images/logo.png" alt="Logo" width={170} height={54} className="h-12 w-auto" priority />
-          </Link>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-14 sm:h-16 flex items-center justify-between">
+        {/* LOGO — auto-size by screen height classes */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Fundación Granito de Arena"
+            width={420}              // large intrinsic for crispness
+            height={120}
+            priority
+            className="h-8 sm:h-10 md:h-12 w-auto"
+            // h-8 on phones, h-10 on small tablets, h-12 on md+
+          />
+        </Link>
 
-          <nav className="flex-1 flex items-center justify-center gap-4 xl:gap-6 2xl:gap-8 font-medium text-white">
-            {navLinks.map((item) => (
-              <Link key={item.href} href={item.href} className="text-[13px] xl:text-sm whitespace-nowrap hover:font-bold">
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+        {/* DESKTOP NAV (hidden on mobile/tablet) */}
+        <nav className="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-7 text-white font-medium">
+          {navLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm xl:text-base whitespace-nowrap transition-colors hover:text-white hover:font-bold"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-          <Link
-            href="/donar"
-            className="shrink-0 bg-white text-blue-700 font-semibold px-3 py-1.5 xl:px-4 xl:py-2 rounded-md hover:bg-gray-100 text-sm"
-          >
-            Donar ahora
-          </Link>
-        </div>
-
-        {/* Mobile / Tablet */}
-        <div className="flex lg:hidden w-full items-center justify-between relative">
-          <button
-            type="button"
-            className="h-12 w-12 -ml-1 inline-flex items-center justify-center text-white rounded-md active:scale-95"
-            style={{ touchAction: "manipulation" }}
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
-          >
-            <svg className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-            </svg>
-          </button>
-
-          <Link href="/" className="hidden md:block">
-            <Image src="/images/logo.png" alt="Logo" width={140} height={40} className="h-10 w-auto" priority />
-          </Link>
-
-          <Link
-            href="/donar"
-            className="bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 text-sm px-3 py-1.5 md:px-4 md:py-2"
-            onClick={() => setMobileOpen(false)}
-          >
-            Donar ahora
-          </Link>
-
-          {/* Dropdown (inside header, under the bar) */}
-          <div
-            className={`absolute top-full left-0 right-0 transition-all duration-200 ${
-              mobileOpen ? "opacity-100 scale-y-100" : "pointer-events-none opacity-0 scale-y-95"
-            }`}
-            style={{ transformOrigin: "top" }}
-          >
-            <nav className="bg-[#001f3f] text-white px-4 pb-4 pt-2 space-y-2 shadow-xl rounded-b-md">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block py-2 text-base font-medium hover:text-blue-300"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
+        {/* DONATE BUTTON (always visible) */}
+        <Link
+          href="/donar"
+          className="bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 transition
+                     text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2"
+        >
+          Donar ahora
+        </Link>
       </div>
     </header>
   );
