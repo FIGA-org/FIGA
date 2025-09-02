@@ -6,15 +6,9 @@ export default function HeroSection() {
     return (
         <section className="relative h-[90vh] bg-gray-900 text-white overflow-hidden">
             {/* Background image with overlay */}
-            <div className="absolute inset-0">
-                <Image
-                    src="/images/hero-bg.png"
-                    alt="Fondo de un niño levantando la mano en señal de protección"
-                    fill
-                    className="object-cover opacity-95"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-transparent" />
+            <div className="absolute inset-0 pointer-events-none">
+                <Image src="/images/hero-bg.png" alt="Fondo de un nino levantando la mano en senal de protección" fill className="object-cover opacity-95" priority />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-transparent pointer-events-none" />
             </div>
 
             {/* Content */}
