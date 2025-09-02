@@ -42,6 +42,7 @@ export default function Footer() {
               { label: "Transparencia", href: "/transparencia" },
               { label: "Donar", href: "/donar" },
               { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
+              { label: "Contacto", href: "/contacto" },
             ].map((item) => (
               <li key={item.href}>
                 <Link
@@ -79,12 +80,12 @@ export default function Footer() {
           {/* Social icons */}
           <div className="flex flex-wrap gap-3 mt-5">
             {[
-              { href: "https://facebook.com/595462060642009", Icon: FaFacebookF, hover: "hover:bg-blue-600" },
-              { href: "https://instagram.com/elenafundacion", Icon: FaInstagram, hover: "hover:bg-pink-500" },
+              { href: "https://www.facebook.com/granitodarena", Icon: FaFacebookF, hover: "hover:bg-blue-600" },
+              { href: "https://www.instagram.com/fgranitodearena", Icon: FaInstagram, hover: "hover:bg-pink-500" },
               { href: "https://x.com/Elena_Fundacion", Icon: FaTwitter, hover: "hover:bg-blue-400" },
-              { href: "https://www.linkedin.com/in/elena-torres-villanueva", Icon: FaLinkedinIn, hover: "hover:bg-blue-700" },
+              { href: "https://www.linkedin.com/in/fundaci%C3%B3n-internacional-granito-de-arena-82653a366/", Icon: FaLinkedinIn, hover: "hover:bg-blue-700" },
               { href: "https://www.tiktok.com/@elena_fundacion", Icon: FaTiktok, hover: "hover:bg-black" },
-              { href: "https://www.youtube.com/channel/UCDiXt1lqvI1zxfKTSeO3_AA", Icon: FaYoutube, hover: "hover:bg-red-600" },
+              { href: "https://www.youtube.com/@fgranitodearena", Icon: FaYoutube, hover: "hover:bg-red-600" },
             ].map(({ href, Icon, hover }) => (
               <a
                 key={href}
