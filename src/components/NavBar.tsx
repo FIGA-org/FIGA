@@ -30,6 +30,7 @@ export default function Navbar() {
     { label: "Transparencia", href: "/transparencia" },
     { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
     { label: "Participa", href: "https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA" },
+    { label: "Contacto", href: "/contacto" }
     // { label: "Noticias", href: "/noticias" },
   ];
 
@@ -37,11 +38,8 @@ export default function Navbar() {
     <header
       className={`shadow-md sticky top-0 z-50 transform transition-transform duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      }`}
-      style={{
-        background: "linear-gradient(to right, rgba(38,87,235,0.3), rgba(222,97,97,0.3))",
-        backdropFilter: "saturate(120%) blur(4px)",
-      }}
+      } bg-gradient-to-r from-blue-700/30 via-blue-500/10 to-red-400/30 backdrop-blur-md backdrop-saturate-150`}
+      style={{ WebkitBackdropFilter: 'saturate(120%) blur(4px)' }}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-16 lg:h-18 flex items-center">
         {/* DESKTOP (lg+) */}

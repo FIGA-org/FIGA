@@ -55,19 +55,11 @@ export default function ImpactSection() {
                     {/* Image */}
                     <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg">
                         <Image
-                            src="/images/impact-photo.png"
+                            src="/images/group-picture.jpeg"
                             alt="Voluntarios ayudando en comunidad"
                             fill
                             className="object-cover"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="flex items-center gap-2 bg-white/10 px-6 py-3 rounded-lg shadow-lg backdrop-blur-sm">
-                                <Award className="h-5 w-5 text-white drop-shadow" strokeWidth={2} />
-                                <span className="text-white font-display font-bold text-lg drop-shadow">
-                                    12+ Años
-                                </span>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Text */}
