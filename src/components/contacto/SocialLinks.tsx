@@ -12,13 +12,13 @@ const socials = [
   {
     label: "Facebook",
     icon: FaFacebookF,
-    href: "https://facebook.com/595462060642009",
+    href: "https://www.facebook.com/granitodarena",
     hover: "hover:bg-blue-600 hover:shadow-blue-500/40",
   },
   {
     label: "Instagram",
     icon: FaInstagram,
-    href: "https://instagram.com/elenafundacion",
+    href: "https://www.instagram.com/fgranitodearena",
     hover: "hover:bg-pink-500 hover:shadow-pink-400/40",
   },
   {
@@ -30,7 +30,7 @@ const socials = [
   {
     label: "LinkedIn",
     icon: FaLinkedinIn,
-    href: "https://www.linkedin.com/in/elena-torres-villanueva",
+    href: "https://www.linkedin.com/in/fundaci%C3%B3n-internacional-granito-de-arena-82653a366/",
     hover: "hover:bg-blue-700 hover:shadow-blue-600/40",
   },
   {
@@ -42,7 +42,7 @@ const socials = [
   {
     label: "YouTube",
     icon: FaYoutube,
-    href: "https://www.youtube.com/channel/UCDiXt1lqvI1zxfKTSeO3_AA",
+    href: "https://www.youtube.com/@fgranitodearena",
     hover: "hover:bg-red-600 hover:shadow-red-500/40",
   },
   {
