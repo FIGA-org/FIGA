@@ -89,17 +89,6 @@ export default function TransparencySection() {
                   <p className="font-sans text-sm text-gray-700 mt-2">
                     {it.body}
                   </p>
-
-                  {/* CTA inline */}
-                  <span
-                    className={`
-                      mt-3 inline-flex items-center gap-1 text-sm font-display font-semibold text-blue-700
-                      opacity-0 group-hover:opacity-100 transition-opacity
-                    `}
-                  >
-                    Conocer más
-                    <ChevronRight className="h-4 w-4" />
-                  </span>
                 </div>
               </article>
             ))}
