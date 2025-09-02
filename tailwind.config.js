@@ -25,6 +25,9 @@ module.exports = {
     "bg-[#001f3f]",
     "from-blue-700/30", "via-blue-500/10", "to-red-400/30",
     "backdrop-blur-md", "backdrop-saturate-150",
+    "opacity-100",
+    "opacity-0",
+    "pointer-events-none"
     // if you use gradient-on-hover classes anywhere, list them too
   ],
 
