@@ -9,19 +9,28 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Hide/show on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+      if (currentScrollY > lastScrollY && currentScrollY > 50) setHidden(true);
+      else setHidden(false);
       setLastScrollY(currentScrollY);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [mobileOpen]);
 
   const navLinks = [
     { label: "Nosotros", href: "/nosotros" },
@@ -30,21 +39,19 @@ export default function Navbar() {
     { label: "Transparencia", href: "/transparencia" },
     { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
     { label: "Participa", href: "https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA" },
-    { label: "Contacto", href: "/contacto" }
-    // { label: "Noticias", href: "/noticias" },
+    { label: "Contacto", href: "/contacto" },
   ];
 
   return (
     <header
-      className={`shadow-md sticky top-0 z-50 transform transition-transform duration-300 ${
+      className={`relative z-[100] shadow-md sticky top-0 transform transition-transform duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       } bg-gradient-to-r from-blue-700/30 via-blue-500/10 to-red-400/30 backdrop-blur-md backdrop-saturate-150`}
-      style={{ WebkitBackdropFilter: 'saturate(120%) blur(4px)' }}
+      style={{ WebkitBackdropFilter: "saturate(120%) blur(4px)" }}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-16 lg:h-18 flex items-center">
         {/* DESKTOP (lg+) */}
         <div className="hidden lg:flex w-full items-center gap-4">
-          {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/images/logo.png"
@@ -56,7 +63,6 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Nav */}
           <nav className="flex-1 flex items-center justify-center gap-4 xl:gap-6 2xl:gap-8 font-medium text-white">
             {navLinks.map((item) => (
               <Link
@@ -69,7 +75,6 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTA */}
           <Link
             href="/donar"
             className="shrink-0 bg-white text-blue-700 font-semibold px-3 py-1.5 xl:px-4 xl:py-2 rounded-md hover:bg-gray-100 transition text-sm"
@@ -80,11 +85,14 @@ export default function Navbar() {
 
         {/* MOBILE + TABLET (under lg) */}
         <div className="flex lg:hidden w-full items-center justify-between">
-          {/* Hamburger */}
+          {/* Hamburger: ensure it sits above everything and receives taps */}
           <button
-            className="flex items-center p-2 text-white"
-            onClick={() => setMobileOpen(!mobileOpen)}
+            type="button"
+            className="flex items-center p-3 -m-3 text-white pointer-events-auto relative z-[101]"
+            onClick={() => setMobileOpen((o) => !o)}
             aria-label="Abrir menú"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             <svg
               className="h-7 w-7"
@@ -101,7 +109,7 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {/* Centered tiny logo on md if you want it visible; comment to hide */}
+          {/* Small center logo on md (optional) */}
           <Link href="/" className="hidden md:block">
             <Image
               src="/images/logo.png"
@@ -113,7 +121,6 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Donate button (right-aligned) */}
           <Link
             href="/donar"
             className="bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 transition text-sm px-3 py-1.5 md:px-4 md:py-2"
@@ -124,20 +131,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#001f3f] text-white px-4 pb-4 pt-2 space-y-2">
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block py-2 text-base font-medium hover:text-blue-300"
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <>
+          {/* Backdrop to close on tap outside */}
+          <button
+            type="button"
+            className="fixed inset-0 z-[98] bg-black/30 lg:hidden"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Cerrar menú"
+          />
+          <div
+            id="mobile-nav"
+            className="fixed top-16 inset-x-0 z-[99] lg:hidden bg-[#001f3f] text-white px-4 pb-6 pt-2 space-y-2 shadow-xl"
+          >
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block py-2 text-base font-medium hover:text-blue-300"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </>
       )}
     </header>
   );
