@@ -80,15 +80,31 @@ export default function Blocks() {
                         pueda expresar sus sentimientos, poner en palabras lo vivido y avanzar
                         hacia su recuperación sin revictimización.
                     </Card>
-                    <Card
-                        icon={HandHeart}
-                        title="Cuota de recuperación que transforma vidas"
-                    >
-                        Para sostener y mejorar la calidad de nuestros servicios, el acompañamiento
-                        se ofrece mediante una cuota de recuperación. Cada aportación fortalece el
-                        programa y permite otorgar <strong>terapia gratuita</strong> a quienes no
-                        pueden cubrir un proceso completo.
-                    </Card>
+<Card
+    icon={HandHeart}
+    title="Terapia particular con doble beneficio"
+>
+    <p>
+        Invierte en tu bienestar y, al mismo tiempo, ayuda a alguien más. Con tu aportación en una terapia particular, nos permites ofrecer <strong>terapia gratuita</strong> a personas que no pueden costearla.
+    </p>
+    <a 
+        href="https://api.whatsapp.com/send?phone=5219613697151&text=Hola%2C%20me%20interesa%20agendar%20una%20terapia%20particular%20con%20el%20modelo%20de%20doble%20beneficio.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n%3F%20%F0%9F%98%8A"
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+            display: 'inline-block',
+            marginTop: '15px',
+            padding: '10px 20px',
+            backgroundColor: '#25D366',
+            color: 'white',
+            borderRadius: '25px',
+            textDecoration: 'none',
+            fontWeight: 'bold'
+        }}
+    >
+        Agendar terapia por WhatsApp
+    </a>
+</Card>
                 </div>
             </div>
         </section>
