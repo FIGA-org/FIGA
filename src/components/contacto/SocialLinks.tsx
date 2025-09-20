@@ -55,41 +55,25 @@ const socials = [
 
 export default function SocialLinks() {
   return (
-<div className="rounded-2xl bg-[#0b2340] text-white p-6 shadow-lg">
-  <h2 className="text-xl font-extrabold">Síguenos en redes sociales</h2>
-  <div className="mt-4 flex flex-wrap gap-4">
-    {socials.map(({ label, icon: Icon, href, hover }) => (
-      <a
-        key={label}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={label}
-        title={label}
-        className={`group relative flex items-center justify-center rounded-full bg-white/10 
-                   w-12 h-12 transition-all duration-300 
-                   hover:scale-110 hover:shadow-lg ${hover}`}
-      >
-        <Icon className="w-5 h-5" />
-      </a>
-    ))}
-  </div>
-
-  {/* ====== INICIO DE LA SECCIÓN AÑADIDA ====== */}
-  <div className="mt-6 pt-4 border-t border-white/20 text-sm">
-    <h3 className="font-bold text-base">Canales Oficiales de Comunicación</h3>
-    <p className="mt-2">
-      Nuestros únicos medios de contacto oficiales son los presentados en esta página.
-    </p>
-    <p className="mt-3">
-      <strong>Aviso Importante:</strong> Cualquier otro número telefónico o perfil de redes sociales no listado aquí, <strong>no representa</strong> una comunicación oficial con nosotros.
-    </p>
-    <p className="mt-3">
-      Para una atención directa y segura, la comunicación debe mantenerse siempre por nuestros medios oficiales: WhatsApp o llamadas al: <strong className="block text-base mt-1">+52 961 369 7151</strong>.
-    </p>
-  </div>
-  {/* ====== FIN DE LA SECCIÓN AÑADIDA ====== */}
-
-</div>
+    <div className="rounded-2xl bg-[#0b2340] text-white p-6 shadow-lg">
+      <h2 className="text-xl font-extrabold">Síguenos en redes sociales</h2>
+      <div className="mt-4 flex flex-wrap gap-4">
+        {socials.map(({ label, icon: Icon, href, hover }) => (
+          <a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            title={label}
+            className={`group relative flex items-center justify-center rounded-full bg-white/10 
+                        w-12 h-12 transition-all duration-300 
+                        hover:scale-110 hover:shadow-lg ${hover}`}
+          >
+            <Icon className="w-5 h-5" />
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }
