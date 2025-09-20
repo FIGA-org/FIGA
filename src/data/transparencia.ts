@@ -3,7 +3,7 @@
 export const sat = {
     portalUrl: "https://portalconsdonazr.sat.gob.mx/Consulta/Transparencia",
     rfc: "FIG121007MI6",
-    denomination: "Fundación Internacional Granito de Arena A.C.",
+    denomination: "Fundación Internacional Granito de Arena",
     oficio: "600-01-06-00-00-2021-1525",
     oficioDate: "10/Dic/2021",
   };
@@ -41,7 +41,7 @@ export const sat = {
       text: "Publicamos informe de destino de recursos y estados financieros.",
     },
     {
-      title: "Sin apoyos públicos 2022",
+      title: "Sin apoyos públicos desde el 2022",
       text: "Informe 2022 sin apoyos gubernamentales, presentado a tiempo.",
     },
   ];

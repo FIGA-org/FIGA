@@ -72,7 +72,7 @@ export default function Footer() {
                 className="inline-flex items-center gap-2 hover:text-white transition"
               >
                 <FaWhatsapp className="h-5 w-5 text-green-500" />
-                +52 961-230-7734
+                +52 961 369 7151
               </a>
             </li>
           </ul>
