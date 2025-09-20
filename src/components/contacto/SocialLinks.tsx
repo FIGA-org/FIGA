@@ -67,13 +67,29 @@ export default function SocialLinks() {
             aria-label={label}
             title={label}
             className={`group relative flex items-center justify-center rounded-full bg-white/10 
-                        w-12 h-12 transition-all duration-300 
-                        hover:scale-110 hover:shadow-lg ${hover}`}
+                       w-12 h-12 transition-all duration-300 
+                       hover:scale-110 hover:shadow-lg ${hover}`}
           >
             <Icon className="w-5 h-5" />
           </a>
         ))}
       </div>
+
+      {/* ====== INICIO DE LA SECCIÓN AÑADIDA ====== */}
+      <div className="mt-6 pt-4 border-t border-white/20 text-sm">
+        <h3 className="font-bold text-base">Canales Oficiales de Comunicación</h3>
+        <p className="mt-2">
+          Nuestros únicos medios de contacto oficiales son los presentados en esta página.
+        </p>
+        <p className="mt-3">
+          <strong>Aviso Importante:</strong> Cualquier otro número telefónico o perfil de redes sociales no listado aquí, <strong>no representa</strong> una comunicación oficial con nosotros.
+        </p>
+        <p className="mt-3">
+          Para una atención directa y segura, la comunicación debe mantenerse siempre por nuestros medios oficiales: WhatsApp o llamadas al: <strong className="block text-base mt-1">+52 961 369 7151</strong>.
+        </p>
+      </div>
+      {/* ====== FIN DE LA SECCIÓN AÑADIDA ====== */}
+
     </div>
   );
 }
