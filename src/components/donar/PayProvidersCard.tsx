@@ -92,7 +92,7 @@ export default function PayProvidersCard({
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5">
-      <h3 className="font-display text-xl font-bold text-gray-900">Stripe o PayPal</h3>
+      <h3 className="font-display text-xl font-bold text-gray-900">Otras formas de donar</h3>
       <p className="mt-1 text-sm text-gray-600">
         Elige tu proveedor preferido para donar de forma segura.
       </p>
@@ -101,7 +101,7 @@ export default function PayProvidersCard({
       <div className="mt-5 rounded-lg border border-gray-200 p-1 text-xs sm:p-1 sm:text-base">
         <div className="mb-2 flex items-center gap-2 font-medium text-gray-800">
           <CreditCard className="h-4 w-4" />
-          Stripe
+          OXXO y otros metodos
         </div>
 
         {stripeBuyButtonId && stripePublishableKey ? (
