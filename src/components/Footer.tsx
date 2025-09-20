@@ -41,7 +41,7 @@ export default function Footer() {
               { label: "Impacto", href: "/#impacto" },
               { label: "Transparencia", href: "/transparencia" },
               { label: "Donar", href: "/donar" },
-              { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
+              { label: "Tiendita con Causa", href: "https://tienda.fundaciongranitodearena.org/" },
               { label: "Contacto", href: "/contacto" },
             ].map((item) => (
               <li key={item.href}>
