@@ -85,7 +85,7 @@ export default function SocialLinks() {
           <strong>Aviso Importante:</strong> Cualquier otro número telefónico o perfil de redes sociales no listado aquí, <strong>no representa</strong> una comunicación oficial con nosotros.
         </p>
         <p className="mt-3">
-          Para una atención directa y segura, la comunicación debe mantenerse siempre por nuestros medios oficiales: WhatsApp o llamadas al: <strong className="block text-base mt-1">+52 961 369 7151</strong>.
+          Para una atención directa y segura, la comunicación debe mantenerse siempre por nuestros medios oficiales: WhatsApp o llamadas al: <strong className="block text-base mt-1">+52 961 369 7151</strong>
         </p>
       </div>
       {/* ====== FIN DE LA SECCIÓN AÑADIDA ====== */}
