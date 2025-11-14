@@ -23,12 +23,14 @@ export default function AmbassadorsBanner() {
                 nuestro mensaje y alcance.
               </p>
               <div className="flex gap-4 flex-wrap mt-6">
-                {/* <Link
-                  href="/noticias"
+                {/* ----- INICIO DE LA MODIFICACIÓN ----- */}
+                <Link
+                  href="/embajadores" // Añadido: Enlace a la nueva página
                   className="bg-white text-blue-700 font-semibold px-5 py-2 rounded-md hover:bg-gray-100 transition"
                 >
-                  Ver noticias
-                </Link> */}
+                  Conocer más
+                </Link>
+                {/* ----- FIN DE LA MODIFICACIÓN ----- */}
                 <Link
                   href="https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA"
                   className="bg-transparent border border-white px-5 py-2 rounded-md font-semibold hover:bg-white hover:text-blue-800 transition"
