@@ -91,10 +91,16 @@ export default function FounderHero() {
               />
             </div>
             <div className="p-4">
-              <p className="text-sm font-semibold text-gray-700">
-                Entrevista a nuestra embajadora Silvia Olmedo
-              </p>
-            </div>
+  <p className="text-sm font-semibold text-gray-700">
+    Entrevista a nuestra embajadora{" "}
+    <Link
+      href="/embajadores/silvia-olmedo"
+      className="text-blue-700 hover:underline font-bold"
+    >
+      Silvia Olmedo
+    </Link>
+  </p>
+</div>
           </div>
         </div>
     </section>

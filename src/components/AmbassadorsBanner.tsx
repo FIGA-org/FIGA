@@ -19,7 +19,14 @@ export default function AmbassadorsBanner() {
             <div className="flex-1">
               <p className="text-white/90 max-w-3xl">
                 Contamos con el respaldo de personalidades reconocidas y otros
-                embajadores como <strong>Silvia Olmedo</strong> comprometidos con la protección infantil, amplificando
+                embajadores como{" "}
+<Link
+  href="/embajadores/silvia-olmedo"
+  className="text-white underline hover:text-orange-300 transition"
+>
+  <strong>Silvia Olmedo</strong>
+</Link>
+{" "}comprometidos con la protección infantil, amplificando
                 nuestro mensaje y alcance.
               </p>
               <div className="flex gap-4 flex-wrap mt-6">
