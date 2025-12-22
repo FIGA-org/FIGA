@@ -4,11 +4,11 @@ import React, { useEffect, useRef } from "react";
 import { CreditCard } from "lucide-react";
 
 type Props = {
-  stripeBuyButtonId: string;      // e.g. "buy_btn_XXXX"
-  stripePublishableKey: string;   // e.g. "pk_live_XXXX"
-  paypalClientId: string;         // e.g. process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
-  paypalCurrency?: string;        // default: MXN
-  paypalAmount?: string;          // default: "250.00"
+  stripeBuyButtonId?: string;
+  stripePublishableKey?: string;
+  paypalClientId?: string;
+  paypalCurrency?: string;
+  paypalAmount?: string;
 };
 
 type PayPalActions = {
@@ -18,14 +18,7 @@ type PayPalActions = {
   };
 };
 
-function StripeBuyButton({
-  buyButtonId,
-  publishableKey,
-}: {
-  buyButtonId: string;
-  publishableKey: string;
-}) {
-  // no JSX for the custom element — avoids TS intrinsic error
+function StripeBuyButton({ buyButtonId, publishableKey }: { buyButtonId: string; publishableKey: string; }) {
   return React.createElement("stripe-buy-button", {
     "buy-button-id": buyButtonId,
     "publishable-key": publishableKey,
@@ -42,7 +35,6 @@ export default function PayProvidersCard({
   const paypalContainerRef = useRef<HTMLDivElement | null>(null);
   const paypalRenderedRef = useRef(false);
 
-  // Load Stripe Buy Button script once
   useEffect(() => {
     if (document.getElementById("stripe-buybutton-js")) return;
     const s = document.createElement("script");
@@ -52,43 +44,43 @@ export default function PayProvidersCard({
     document.body.appendChild(s);
   }, []);
 
-  // Load PayPal SDK once, then render buttons once
   useEffect(() => {
     const renderButtons = () => {
-      // @ts-expect-error - PayPal adds a global `paypal` object
+      // @ts-expect-error
       if (window.paypal && paypalContainerRef.current && !paypalRenderedRef.current) {
-        // @ts-expect-error - PayPal's `Buttons` method is dynamically added
-        window.paypal
-          .Buttons({
+        // @ts-expect-error
+        window.paypal.Buttons({
             style: { shape: "pill", color: "gold", label: "donate", layout: "vertical" },
-            createOrder: (_data: unknown, actions: PayPalActions) =>
+            createOrder: (_data: any, actions: PayPalActions) =>
               actions.order.create({
-                purchase_units: [
-                  { amount: { value: paypalAmount, currency_code: paypalCurrency } },
-                ],
+                purchase_units: [{ amount: { value: paypalAmount, currency_code: paypalCurrency } }],
               }),
-            onApprove: (_data: unknown, actions: PayPalActions) =>
-              actions.order.capture(),
-          })
-          .render(paypalContainerRef.current);
+            onApprove: (_data: any, actions: PayPalActions) => actions.order.capture(),
+          }).render(paypalContainerRef.current);
         paypalRenderedRef.current = true;
       }
     };
 
-    if (document.getElementById("paypal-sdk")) {
-      renderButtons();
-      return;
+    if (paypalClientId) {
+      if (document.getElementById("paypal-sdk")) {
+        renderButtons();
+      } else {
+        const s = document.createElement("script");
+        s.id = "paypal-sdk";
+        s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=${encodeURIComponent(paypalCurrency)}`;
+        s.async = true;
+        s.onload = renderButtons;
+        document.body.appendChild(s);
+      }
     }
-
-    const s = document.createElement("script");
-    s.id = "paypal-sdk";
-    s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(
-      paypalClientId
-    )}&currency=${encodeURIComponent(paypalCurrency)}`;
-    s.async = true;
-    s.onload = renderButtons;
-    document.body.appendChild(s);
   }, [paypalClientId, paypalCurrency, paypalAmount]);
+
+  // Mensaje de desarrollo
+  const handleDisabledClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    alert("Esta opción de pago aún está en desarrollo y no ha sido configurada.");
+  };
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5">
@@ -97,41 +89,59 @@ export default function PayProvidersCard({
         Elige tu proveedor preferido para donar de forma segura.
       </p>
 
-      {/* Stripe Buy Button */}
-      <div className="mt-5 rounded-lg border border-gray-200 p-1 text-xs sm:p-1 sm:text-base">
+      {/* Stripe Section */}
+      <div className="mt-5 rounded-lg border border-gray-200 p-4">
         <div className="mb-2 flex items-center gap-2 font-medium text-gray-800">
           <CreditCard className="h-4 w-4" />
-          OXXO y otros metodos
+          OXXO y otros métodos (Stripe)
         </div>
 
-        {stripeBuyButtonId && stripePublishableKey ? (
-          <StripeBuyButton
-            buyButtonId={stripeBuyButtonId}
-            publishableKey={stripePublishableKey}
+        <div className="relative">
+          {/* Capa invisible que bloquea el clic */}
+          <div 
+            onClick={handleDisabledClick}
+            className="absolute inset-0 z-20 cursor-help"
+            title="En desarrollo"
           />
-        ) : (
-          <p className="text-gray-500">
-            Configura tu <code>stripeBuyButtonId</code> y <code>stripePublishableKey</code>.
-          </p>
-        )}
+          
+          <div className="opacity-60">
+            {stripeBuyButtonId && stripePublishableKey ? (
+              <StripeBuyButton buyButtonId={stripeBuyButtonId} publishableKey={stripePublishableKey} />
+            ) : (
+              <div className="bg-gray-100 p-4 text-center rounded-md text-gray-400 text-sm">
+                Esperando configuración de Stripe...
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* PayPal Buttons */}
+      {/* PayPal Section */}
       <div className="mt-5 rounded-lg border border-gray-200 p-4">
         <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-800">
-          {/* Simple PP glyph */}
-          <svg aria-hidden className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M4 18l1.2-8.4C5.5 6 7.1 5 9.4 5h6.3c1.8 0 3 .7 3.5 1.8.4.8.4 1.8.2 2.8-.5 2.3-2.2 3.4-4.8 3.4h-3.2l-.4 2.5H7.2L6.8 18H4z" />
           </svg>
           PayPal
         </div>
-        {paypalClientId ? (
-          <div ref={paypalContainerRef} />
-        ) : (
-          <p className="text-sm text-gray-500">
-            Agrega tu <code>paypalClientId</code> para mostrar los botones.
-          </p>
-        )}
+
+        <div className="relative">
+          {/* Capa invisible que bloquea el clic */}
+          <div 
+            onClick={handleDisabledClick}
+            className="absolute inset-0 z-20 cursor-help"
+          />
+
+          <div className="opacity-60">
+            {paypalClientId ? (
+              <div ref={paypalContainerRef} />
+            ) : (
+              <div className="bg-gray-100 p-4 text-center rounded-md text-gray-400 text-sm">
+                Esperando configuración de PayPal...
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
