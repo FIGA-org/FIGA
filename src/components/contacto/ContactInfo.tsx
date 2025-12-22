@@ -35,10 +35,10 @@ export default function ContactInfo() {
     <aside className="rounded-2xl bg-white shadow-lg border border-gray-100 p-6 space-y-4">
       <h2 className="text-xl font-extrabold">Información de contacto</h2>
 
-      <CopyRow label="Ubicación" value="Tuxtla Gutiérrez, Chiapas" />
-      <CopyRow label="Correo" value="contacto@fundaciongranito.org" />
+      <CopyRow label="Ubicación" value="Dirección: Av. Décima Nte. Pte. 1131A, Vista Hermosa, 29030 Tuxtla Gutiérrez, Chiapas" />
+      <CopyRow label="Correo" value="contacto@fundaciongranitodearena.org" />
       <CopyRow label="Donantes" value="donantes@fundaciongranitodearena.org" />
-      <CopyRow label="WhatsApp" value="+52 961-230-7734" />
+      <CopyRow label="WhatsApp o llamadas" value="+52 961 369 7151" />
     </aside>
   );
 }

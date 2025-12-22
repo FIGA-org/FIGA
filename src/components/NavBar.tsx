@@ -9,7 +9,7 @@ export default function Navbar() {
     { label: "Nuestro Impacto", href: "/#impacto" },
     { label: "Programas", href: "/#programas" },
     { label: "Transparencia", href: "/transparencia" },
-    { label: "Tiendita Con Causa", href: "https://arenito.mercadoshops.com.mx/" },
+    { label: "Tiendita con causa", href: "https://tienda.fundaciongranitodearena.org" },
     { label: "Participa", href: "https://fundaciongranitodearena.ipzmarketing.com/f/QjJs1yuomuA" },
     { label: "Contacto", href: "/contacto" },
   ];

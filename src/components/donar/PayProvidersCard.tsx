@@ -98,7 +98,7 @@ export default function PayProvidersCard({
       <div className="mt-5 rounded-lg border border-gray-200 p-4 bg-gray-50/30">
         <div className="mb-2 flex items-center gap-2 font-medium text-gray-400">
           <CreditCard className="h-4 w-4" />
-          Stripe (En desarrollo)
+          OXXO y otros metodos
         </div>
         <div className="relative">
           {/* Capa invisible que bloquea el botón */}
