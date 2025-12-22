@@ -4,11 +4,11 @@ import React, { useEffect, useRef } from "react";
 import { CreditCard } from "lucide-react";
 
 type Props = {
-  stripeBuyButtonId: string;      
-  stripePublishableKey: string;   
-  paypalClientId: string;         
-  paypalCurrency?: string;        
-  paypalAmount?: string;          
+  stripeBuyButtonId: string;
+  stripePublishableKey: string;
+  paypalClientId: string;
+  paypalCurrency?: string;
+  paypalAmount?: string;
 };
 
 type PayPalActions = {
@@ -17,6 +17,19 @@ type PayPalActions = {
     capture: () => Promise<void>;
   };
 };
+
+function StripeBuyButton({
+  buyButtonId,
+  publishableKey,
+}: {
+  buyButtonId: string;
+  publishableKey: string;
+}) {
+  return React.createElement("stripe-buy-button", {
+    "buy-button-id": buyButtonId,
+    "publishable-key": publishableKey,
+  });
+}
 
 export default function PayProvidersCard({
   stripeBuyButtonId = process.env.NEXT_PUBLIC_STRIPE_BUTTON_ID || "",
@@ -28,11 +41,16 @@ export default function PayProvidersCard({
   const paypalContainerRef = useRef<HTMLDivElement | null>(null);
   const paypalRenderedRef = useRef(false);
 
-  /** * NOTA: Se ha desactivado la carga del script de Stripe y su botón real 
-   * para que quede como una opción a implementar en el futuro.
-   */
+  // Cargamos los scripts originales (como pediste, no afecta que carguen)
+  useEffect(() => {
+    if (document.getElementById("stripe-buybutton-js")) return;
+    const s = document.createElement("script");
+    s.id = "stripe-buybutton-js";
+    s.src = "https://js.stripe.com/v3/buy-button.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }, []);
 
-  // Lógica de PayPal (Se mantiene activa)
   useEffect(() => {
     const renderButtons = () => {
       // @ts-expect-error
@@ -43,12 +61,9 @@ export default function PayProvidersCard({
             style: { shape: "pill", color: "gold", label: "donate", layout: "vertical" },
             createOrder: (_data: unknown, actions: PayPalActions) =>
               actions.order.create({
-                purchase_units: [
-                  { amount: { value: paypalAmount, currency_code: paypalCurrency } },
-                ],
+                purchase_units: [{ amount: { value: paypalAmount, currency_code: paypalCurrency } }],
               }),
-            onApprove: (_data: unknown, actions: PayPalActions) =>
-              actions.order.capture(),
+            onApprove: (_data: unknown, actions: PayPalActions) => actions.order.capture(),
           })
           .render(paypalContainerRef.current);
         paypalRenderedRef.current = true;
@@ -62,45 +77,55 @@ export default function PayProvidersCard({
 
     const s = document.createElement("script");
     s.id = "paypal-sdk";
-    s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(
-      paypalClientId
-    )}&currency=${encodeURIComponent(paypalCurrency)}`;
+    s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=${encodeURIComponent(paypalCurrency)}`;
     s.async = true;
     s.onload = renderButtons;
     document.body.appendChild(s);
   }, [paypalClientId, paypalCurrency, paypalAmount]);
 
-  // Manejador para el clic en la opción no configurada
-  const handleStripePlaceholderClick = () => {
-    alert("Esta opción no ha sido configurada aún.");
+  // Función para mostrar el mensaje de alerta
+  const handleDisabledClick = () => {
+    alert("Esta opción aún está en desarrollo.");
   };
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5">
-      <h3 className="font-display text-xl font-bold text-gray-900">Métodos de Pago</h3>
+      <h3 className="font-display text-xl font-bold text-gray-900">Otras formas de donar</h3>
       <p className="mt-1 text-sm text-gray-600">
         Elige tu proveedor preferido para donar de forma segura.
       </p>
 
-      {/* Opción de Stripe (En desarrollo/No configurada) */}
-      <div className="mt-5 rounded-lg border border-gray-200 p-4 bg-gray-50/50">
-        <div className="mb-3 flex items-center gap-2 font-medium text-gray-400">
+      {/* SECCIÓN STRIPE (BLOQUEADA) */}
+      <div className="mt-5 rounded-lg border border-gray-200 p-4">
+        <div className="mb-2 flex items-center gap-2 font-medium text-gray-800">
           <CreditCard className="h-4 w-4" />
-          Stripe (Próximamente)
+          Stripe
         </div>
 
-        <button
-          onClick={handleStripePlaceholderClick}
-          className="w-full bg-[#635bff] opacity-60 text-white py-2 px-4 rounded-md font-medium cursor-pointer hover:bg-[#5851e0] transition-colors"
-        >
-          Donar con Tarjeta
-        </button>
-        <p className="mt-2 text-[10px] text-gray-400 text-center uppercase tracking-widest font-semibold">
-          Opción en desarrollo
-        </p>
+        {/* Contenedor relativo para posicionar el bloqueo */}
+        <div className="relative group">
+          {/* CAPA DE BLOQUEO: Atrapa el clic y cambia el cursor */}
+          <div 
+            className="absolute inset-0 z-10 cursor-not-allowed"
+            title="Esta opción aún está en desarrollo"
+            onClick={handleDisabledClick}
+          />
+          
+          {/* El botón real se renderiza debajo pero no es clickeable */}
+          <div className="opacity-80"> 
+            {stripeBuyButtonId && stripePublishableKey ? (
+              <StripeBuyButton
+                buyButtonId={stripeBuyButtonId}
+                publishableKey={stripePublishableKey}
+              />
+            ) : (
+              <p className="text-gray-500">Configuración pendiente.</p>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Botones de PayPal (Activos) */}
+      {/* SECCIÓN PAYPAL (BLOQUEADA) */}
       <div className="mt-5 rounded-lg border border-gray-200 p-4">
         <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-800">
           <svg aria-hidden className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -108,13 +133,23 @@ export default function PayProvidersCard({
           </svg>
           PayPal
         </div>
-        {paypalClientId ? (
-          <div ref={paypalContainerRef} />
-        ) : (
-          <p className="text-sm text-gray-500">
-            Agrega tu <code>paypalClientId</code> para mostrar los botones.
-          </p>
-        )}
+
+        <div className="relative group">
+          {/* CAPA DE BLOQUEO para PayPal */}
+          <div 
+            className="absolute inset-0 z-10 cursor-not-allowed"
+            title="Esta opción aún está en desarrollo"
+            onClick={handleDisabledClick}
+          />
+
+          <div className="opacity-80">
+            {paypalClientId ? (
+              <div ref={paypalContainerRef} />
+            ) : (
+              <p className="text-sm text-gray-500">Configuración pendiente.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
