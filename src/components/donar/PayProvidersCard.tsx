@@ -46,9 +46,9 @@ export default function PayProvidersCard({
 
   useEffect(() => {
     const renderButtons = () => {
-      // @ts-expect-error
+      // @ts-expect-error -- PayPal SDK adds window.paypal at runtime.
       if (window.paypal && paypalContainerRef.current && !paypalRenderedRef.current) {
-        // @ts-expect-error
+        // @ts-expect-error -- PayPal SDK adds window.paypal at runtime.
         window.paypal.Buttons({
             style: { shape: "pill", color: "gold", label: "donate", layout: "vertical" },
             createOrder: (_data: any, actions: PayPalActions) =>
